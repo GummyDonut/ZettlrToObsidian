@@ -3,6 +3,8 @@ const logger = require('./components/logger')
 const chalk = require("chalk"); 
 const buildLinkMap = require('./components/buildLinkMap')
 const reLink = require('./components/relink')
+const imageMove = require('./components/imageMove')
+const imageLink = require('./components/imageLink')
 
 // setup our command line options
 const optionDefinitions = [
@@ -49,7 +51,23 @@ switch (options.step) {
     try {
       reLink.link(options.path)
     } catch(err) {
-      logger.error('Error in build process: ----------')
+      logger.error('Error in relink process: ----------')
+      logger.printErrorStackTrace(err)
+    }
+    break;
+  case 'imagemove':
+    try {
+      imageMove.move(options.path)
+    } catch(err) {
+      logger.error('Error in image move process: ----------')
+      logger.printErrorStackTrace(err)
+    }
+    break;
+  case 'imagelink':
+    try {
+      imageLink.link(options.path)
+    } catch(err) {
+      logger.error('Error in image move process: ----------')
       logger.printErrorStackTrace(err)
     }
     break;
